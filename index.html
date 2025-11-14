@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"><!-- 문자 인코딩 설정 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!-- 모바일 화면 최적화 -->
+    <title>터치터치 꽃다발</title> <!-- 브라우저 탭에 보이는 제목 -->
+    <link rel="stylesheet" href="style.css"> <!-- 스타일 시트 연결 (디자인 관련) -->
+</head>
+
+<body>
+    <!-- 배경 화면을 위한 빈 div -->
+    <div class="background"></div>
+
+    <!-- 메인 화면 영역 -->
+    <div id="mainScreen">
+        <!-- 게임 제목 -->
+        <div id="mainTitle">
+            <h1>터치터치 꽃다발</h1>
+        </div>
+        <!-- 꽃가게 이미지 -->
+        <div class="imageContainer">
+            <img src="assets/image/flowerShop.png" alt="Flower Shop" id="flowerShopImage">
+        </div>
+        <!-- 게임 버튼들 (게임 방법, 시작) -->
+        <div class="buttonContainer">
+            <img src="assets/image/button/ruleButton.png" alt="Rules" id="ruleButton"><!-- 게임 방법 버튼 -->
+            <img src="assets/image/button/startButton.png" alt="Start" id="startButton"><!-- 게임 시작 버튼 -->
+        </div>
+    </div>
+
+    <!-- 게임 방법 모달 창 (처음에는 숨김) -->
+    <div id="rulesModal" class="modal">
+        <div class="modal-content">
+            <!-- 모달 닫기 버튼 (X 표시) -->
+            <span class="close-btn" id="closeModalBtn">&times;</span>
+            <!-- 사운드 버튼 추가 -->
+            <button id="soundBtn">🔊</button>
+            <h2>[ 게임 방법 ]</h2>
+            <p>
+                1. QR코드를 통해 🎮(게임)을 시작한다. <br>
+                2. 🎮(게임) 시작 후 주문이 들어오면 주문에 맞게 🌸(꽃)을 수집한다. <br>
+                3. 🌸(꽃)을 전부 수집 후 2가지 색깔의 🌸(꽃)의 양을 비교하는 질문이 나온다. <br>
+                4. 비교 질문 정답 시 💐(꽃다발)이 완성된다. <br>
+            </p>
+            <p>
+            <h2>※ 주의 사항 ※</h2>
+            <p> 1. 🌸(꽃) 수집 단계에서 틀릴 경우 모았던 🌸(꽃)들이 사라지며 🌸(꽃)들의 위치가 바뀐다. <br>
+                2. 비교 질문 단계에서 틀릴 경우 다시 선택할 기회가 제공된다. </p>
+            </p>
+        </div>
+    </div>
+
+    <!-- 주문 모달 창: 주문 내용을 보여주고 확인 버튼이 있음 -->
+    <div id="orderModal" class="hidden">
+        <img id="personImg" src="" alt="person"><!-- 주문한 사람 이미지 -->
+        <p id="orderText"></p><!-- 주문 텍스트 -->
+        <button id="confirmOrderBtn">확인</button><!-- 주문 확인 버튼 -->
+    </div>
+
+    <!-- 에러 모달: 잘못된 꽃 클릭 시 보여주는 창 -->
+    <div id="errorModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>앗! 주문에 없는 꽃이야!<br>
+                다시 해보자!</h2>
+            <button id="closeErrorModalBtn">닫기</button><!-- 에러 모달 닫기 버튼 -->
+        </div>
+    </div>
+
+    <!-- 현재 수집한 꽃 개수를 보여주는 영역 -->
+    <div id="flowerCountDisplay"></div>
+
+    <!-- 꽃 개수 비교 질문 모달 -->
+    <div id="compareModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <h2>어떤색 꽃이 더 많나요?</h2>
+            <!-- 버튼을 감싸는 컨테이너 추가 -->
+            <div id="compareBtnContainer">
+                <button id="compareBtn1"></button><!-- 첫 번째 꽃 버튼 -->
+                <button id="compareBtn2"></button><!-- 두 번째 꽃 버튼 -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 정답 모달: 꽃다발 완성 후 보여주는 창 -->
+    <div id="resultModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <img id="bouquetImage" src="" alt="꽃다발 이미지"><!-- 완성된 꽃다발 이미지 -->
+            <h2>꽃다발이 완성되었어요!</h2>
+            <button id="closeResultModalBtn">종료하기</button><!-- 게임 종료 버튼 -->
+        </div>
+    </div>
+
+    <!-- 오답 시 다시 생각해보라는 메시지를 보여주는 모달 -->
+    <div id="retryModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>다시 생각해볼까요?</h2>
+            <button id="retryConfirmBtn">확인</button><!-- 재도전 확인 버튼 -->
+        </div>
+    </div>
+
+    <!-- BGM + TTS -->
+    <audio id="backgroundAudio" src="assets/audio/1141.mp3" preload="auto" loop></audio>
+    <audio id="ttsAudio" src="assets/audio/tts.mp3"></audio>
+
+
+    <!-- 자바스크립트 파일 연결 (게임 기능 관련 코드) -->
+    <script src="game.js"></script>
+</body>
+
+</html>
